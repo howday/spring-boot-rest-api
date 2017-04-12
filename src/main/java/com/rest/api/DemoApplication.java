@@ -41,7 +41,7 @@ public class DemoApplication {
 
                 JsonNode node = mapper.readTree(result);
                 Gene gene = new Gene();
-                gene.setGeneAliases("newe");
+                gene.setGeneAliases("geneAlias");
                 boolean isGeneAdded = false;
                 List<Variant> variants = new ArrayList<>();
                 for (JsonNode geneVariant : node) {
