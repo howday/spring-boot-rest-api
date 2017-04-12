@@ -1,7 +1,5 @@
 package com.rest.api;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.api.domain.Gene;
@@ -30,25 +28,26 @@ public class DemoApplication {
         return (args) -> {
 
 
+            /**
+             * Gets data from given url
+             */
             RestTemplate restTemplate = new RestTemplate();
             String result = restTemplate.getForObject("http://oncokb.org/api/v1/genes/673/variants", String.class);
 
             try {
-                JsonParser jsonParser = new JsonFactory().createParser(result);
-
 
                 ObjectMapper mapper = new ObjectMapper();
-
                 JsonNode node = mapper.readTree(result);
+
                 Gene gene = new Gene();
-                gene.setGeneAliases("geneAlias");
                 boolean isGeneAdded = false;
+
                 List<Variant> variants = new ArrayList<>();
                 for (JsonNode geneVariant : node) {
 
                     if (!isGeneAdded) {
                         String hugoSymbol = geneVariant.path("gene").path("hugoSymbol").asText();
-                        String geneAliases = geneVariant.path("gene").path("geneAliases").asText(); //need to change to list
+                        String geneAliases = geneVariant.path("gene").path("geneAliases").asText();
                         Long entrezGeneId = geneVariant.path("gene").path("entrezGeneId").asLong();
                         Boolean oncogene = geneVariant.path("gene").path("oncogene").asBoolean();
                         Boolean tsg = geneVariant.path("gene").path("tsg").asBoolean();

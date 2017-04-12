@@ -14,6 +14,9 @@ public class Variant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String alteration;
+    private String consequenceTerm;
+    private Boolean isGenerallyTruncating;
 
     public Long getId() {
         return id;
@@ -47,7 +50,9 @@ public class Variant {
         isGenerallyTruncating = generallyTruncating;
     }
 
-    private String alteration;
-    private String consequenceTerm;
-    private Boolean isGenerallyTruncating;
+    @Override
+    public String toString() {
+        return ("Alteration: " + alteration + "\nConsequence Term: " + consequenceTerm + "\nIs Generally Truncating: " + isGenerallyTruncating);
+    }
+
 }

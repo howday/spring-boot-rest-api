@@ -14,14 +14,9 @@ public class GeneService {
     @Autowired
     GeneRepository geneRepository;
 
-    public void add() {
-        Gene gene = new Gene();
-        gene.setGeneAliases("Test");
-        geneRepository.save(gene);
+    public Gene get() {
+//        geneRepository.findAll().forEach(a -> a.getVariants().forEach(b -> System.out.println(b.getConsequenceTerm())));
+        return geneRepository.findOne(1L);
     }
 
-    public Gene get() {
-        geneRepository.findAll().forEach(a -> a.getVariants().forEach(b -> System.out.println(b.getConsequenceTerm())));
-        return null;
-    }
 }
